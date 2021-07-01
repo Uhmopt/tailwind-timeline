@@ -15,7 +15,7 @@ export default function TimelineRuller() {
     hrs.push(index)
   }
   return (
-    <div className="flex flex-row justify-items-start items-center">
+    <div className="pl-28 flex flex-row justify-items-start items-center">
       {dirAmPm.map((nowAmPm) =>
         hrs.map((hr, hrIndex) => (
           <UnitHour key={hrIndex} value={`${hr} ${nowAmPm}`} />

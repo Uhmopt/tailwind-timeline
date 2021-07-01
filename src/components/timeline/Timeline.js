@@ -4,7 +4,7 @@ import TimelineRuller from "./TimelineRuller";
 
 export default function Timeline({ title = "", data = [], ...props }) {
   const [unit, setUnit] = useState(128);
-  const [defaultProps, setDefaultProps] = useState([
+  const [smapleData, setSmapleData] = useState([
     {
       border: true,
       eventType: 1,
@@ -42,10 +42,12 @@ export default function Timeline({ title = "", data = [], ...props }) {
       {Boolean(title?.length) && (
         <span className="text-3xl font-bold">{title ?? ""}</span>
       )}
-      {defaultProps.map((item, index) => {
-        return <TimelineContent heading={index + 1} data={item} />;
-      })}
-      <div></div>
+      <div className="w-full overflow-x-auto">
+        <TimelineRuller />
+        {smapleData.map((item, index) => {
+          return <TimelineContent heading={index + 1} data={item} unit={unit} />;
+        })}
+      </div>
     </div>
   );
 }

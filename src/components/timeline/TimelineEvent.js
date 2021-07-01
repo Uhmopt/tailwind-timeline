@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 
 export default function TimelineEvent({
-  title = "haha",
-  tag = "tiny small",
+  title = 'haha',
+  tag = 'tiny small',
   unit = 128,
   // time = {
   start = 10000,
@@ -12,52 +12,69 @@ export default function TimelineEvent({
   border = false,
   ...props
 }) {
-  const daySecond = 86400;
-  const fullWidth = unit * 24;
+  const daySecond = 86400
+  const fullWidth = unit * 24
 
   return (
     <div
-      className={`absolute h-16 px-2 flex flex-col justify-around rounded-lg border-2 ${
-        Boolean(border) ? "border-red-600" : "border-transparent"
-      } ${
-        eventType == 2 &&
-        "bg-gradient-to-r from-transparent via-event-dark to-transparent border-transparent space-x-2"
-      } ${
-        eventType == 3 &&
-        "bg-gradient-to-r from-transparent via-event-dark to-event-dark border-r-0"
-      } cursor-pointer overflow-x-hidden bg-event-dark  hover:bg-gray-600 bg-gradient-to-l`}
+      className="flex flex-row absolute h-16 flex-shrink-0 flex-grow-0"
       style={
         Number(eventType) === 1
           ? {
               left: (fullWidth * start) / daySecond,
-              width: (fullWidth * (end - start)) / daySecond,
+              flexBasis: (fullWidth * (end - start)) / daySecond,
+            }
+          : eventType === 2
+          ? {
+              left: (fullWidth * start) / daySecond - 64,
+              flexBasis: (fullWidth * (end - start)) / daySecond,
             }
           : {
               left: (fullWidth * start) / daySecond,
             }
       }
     >
-      <div className="font-bold w-full overflow-hidden text-sm">
-        {title ?? ""}
-      </div>
-      <div className="flex flex-row">
-        <div className="w-full flex flex-row justify-between items-center">
-          <div className="flex justify-flex-start items-center">
-            <span className="text-white text-xs">⬤</span>
-            <span className="text-xs px-2">{tag ?? ""}</span>
+      {Boolean(eventType === 2) && (
+        <div className="w-16 bg-gradient-to-r from-transparent via-event-dark to-event-dark border-0">
+          &nbsp;
+        </div>
+      )}
+      <div
+        className={`px-2 w-full flex flex-col justify-around bg-event-dark cursor-pointer overflow-x-hidden ${
+          eventType === 2 // both grad
+            ? 'rounded-none border-0'
+            : eventType === 3 // right grad
+            ? 'rounded-l-lg'
+            : 'rounded-lg border-2'
+        } ${Boolean(border) ? 'border-red-600' : 'border-transparent'}`}
+      >
+        <div className="font-bold w-full overflow-hidden text-sm">
+          {title ?? ''}
+        </div>
+        <div className="flex flex-row">
+          <div className="w-full flex flex-row justify-between items-center">
+            <div className="flex justify-flex-start items-center">
+              <span className="text-white text-xs">⬤</span>
+              <span className="text-xs px-2">{tag ?? ''}</span>
+            </div>
+            <div className="text-white text-xs">asdflkajsdfl</div>
           </div>
-          <div className="text-white text-xs">asdflkajsdfl</div>
+        </div>
+        <div className="flex flex-row">
+          <div className="w-full flex flex-row justify-between items-center">
+            <div className="flex justify-flex-start items-center">
+              <span className="text-xs">Live</span>
+              <span className="text-white text-xs px-2">ahfaklsdfjalksdfj</span>
+            </div>
+            <div className="text-white text-xs">asdflkajsdfl</div>
+          </div>
         </div>
       </div>
-      <div className="flex flex-row">
-        <div className="w-full flex flex-row justify-between items-center">
-          <div className="flex justify-flex-start items-center">
-            <span className="text-xs">Live</span>
-            <span className="text-white text-xs px-2">ahfaklsdfjalksdfj</span>
-          </div>
-          <div className="text-white text-xs">asdflkajsdfl</div>
+      {Boolean(eventType >= 2) && (
+        <div className="w-16 bg-gradient-to-l from-transparent via-event-dark to-event-dark border-r-0">
+          &nbsp;
         </div>
-      </div>
+      )}
     </div>
-  );
+  )
 }
