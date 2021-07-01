@@ -16,7 +16,7 @@ export default function TimelineIndicator({ unit = 128, count = 0, ...props }) {
         height: count * 80 - 10,
       }}
     >
-      <div className="h-full w-full mix-blend-hard-light bg-gray-900 opacity-5 pointer-events-none">
+      <div className="h-full w-full mix-blend-hard-light bg-gray-900 opacity-10 pointer-events-none">
         &nbsp;
       </div>
     </div>

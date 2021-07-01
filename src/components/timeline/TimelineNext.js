@@ -1,8 +1,11 @@
 import React from 'react'
 
-export default function TimelineNext() {
+export default function TimelineNext({ className = '', ...props }) {
   return (
-    <div className="right-6 top-14 fixed">
+    <div
+      {...props}
+      className={`px-2 right-6 top-14 fixed cursor-pointer bg-gray-900 flex justify-center items-center ${className}`}
+    >
       <svg
         className="w-4 fill-current text-time-puple"
         xmlns="http://www.w3.org/2000/svg"
