@@ -1,5 +1,4 @@
 import React from 'react'
-import defaultAvatar from 'logo.svg'
 
 export default function TimelineAvatar({
   src = '',

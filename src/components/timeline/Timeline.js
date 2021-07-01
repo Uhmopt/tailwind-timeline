@@ -1,10 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { demoData } from "./demoData";
 import TimelineContent from "./TimelineContent";
 import TimelineRuller from "./TimelineRuller";
 
+export const unit = 128
+
 export default function Timeline({ title = "", data = [], ...props }) {
-  const [unit, setUnit] = useState(128);
   const refScroller = useRef();
 
   const changeScrollHeight = (e) => {
@@ -37,7 +38,7 @@ export default function Timeline({ title = "", data = [], ...props }) {
             <TimelineContent
               key={index}
               heading={index + 1}
-              data={item?.Priority2Creator?.contents?.items ?? []}
+              data={item}
               unit={unit}
             />
           );

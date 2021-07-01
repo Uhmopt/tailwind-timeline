@@ -20,9 +20,10 @@ export const filterEventByToday = (event) => {
 export default function TimelineContent({
   heading = '',
   unit = 128,
-  data = [],
+  data = {},
   ...props
 }) {
+  const events = data?.Priority2Creator?.contents?.items ?? []
   return (
     <div className="h-16 flex flex-row my-2 relative">
       <div className="w-18 sm:w-28 fixed z-20 h-16 flex flex-row justify-start bg-event-content">
@@ -30,12 +31,15 @@ export default function TimelineContent({
           {heading ?? ''}
         </div>
         <div className="w-16">
-          <TimelineAvatar className={''} src={data?.thumbnailImageUrl} />
+          <TimelineAvatar
+            className={''}
+            src={data?.Priority2Creator?.platformProfileImageUrl ?? ''}
+          />
         </div>
       </div>
       <div className="pl-28 fixed w-full h-16 bg-event-content">&nbsp;</div>
       <div className="pl-28 relative w-full">
-        {(data ?? []).filter(filterEventByToday).map((item, index) => (
+        {(events ?? []).filter(filterEventByToday).map((item, index) => (
           <TimelineEvent key={index} unit={unit} data={item} />
         ))}
       </div>

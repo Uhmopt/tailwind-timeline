@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ReactTooltip from 'react-tooltip'
 
 export const daySecond = 86400
@@ -7,24 +7,18 @@ export const getTodayOffset = (date = new Date()) => {
   return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
 }
 
-export default function TimelineEvent({
-  unit = 128,
-  eventType = 1,
-  border = false,
-  data,
-  ...props
-}) {
+export default function TimelineEvent({ unit = 128, data, ...props }) {
   const fullWidth = unit * 24
-  const [start, setStart] = React.useState('')
-  const [end, setEnd] = React.useState('')
 
+  // calc time
   const startedDate = new Date(data?.started * 1000)
   const endedDate = new Date(data?.ended * 1000)
+  const start = getTodayOffset(startedDate)
+  const end = getTodayOffset(endedDate)
 
-  useEffect(() => {
-    setStart(getTodayOffset(startedDate))
-    setEnd(getTodayOffset(endedDate))
-  }, [startedDate, endedDate])
+  // calc event type
+  const border = data?.type === 'PLANNED'
+  const eventType = data?.type === 'PLANNED' ? 1 : 2
 
   return (
     <div
@@ -70,7 +64,7 @@ export default function TimelineEvent({
             Boolean(!border) ? 'text-white' : ''
           }  `}
         >
-          {data.title ?? ''}
+          {data?.title ?? ''}
         </div>
         <div className="flex flex-row">
           <div className="w-full flex flex-row justify-between items-center">
@@ -84,8 +78,8 @@ export default function TimelineEvent({
               >
                 ⬤
               </span>
-              <span className="text-xs px-2" data-tip={data.type ?? ''}>
-                {data.type ?? ''}
+              <span className="text-xs px-2" data-tip={data?.type ?? ''}>
+                {data?.type ?? ''}
               </span>
               <ReactTooltip />
             </div>
@@ -96,9 +90,9 @@ export default function TimelineEvent({
                     ? 'text-event-no-active'
                     : 'text-white'
                 } text-xs`}
-                data-tip={data.views}
+                data-tip={data?.views}
               >
-                {data.views}
+                {data?.views}
                 <ReactTooltip />
               </div>
             ) : (
@@ -110,8 +104,8 @@ export default function TimelineEvent({
           <div className="flex flex-row">
             <div className="w-full flex flex-row justify-between items-center">
               <div className="flex justify-flex-start items-center">
-                <span className="text-xs" data-tip={data.searchterms}>
-                  {data.searchterms}
+                <span className="text-xs" data-tip={data?.searchterms}>
+                  {data?.searchterms}
                 </span>
                 <ReactTooltip />
                 <span
@@ -120,9 +114,9 @@ export default function TimelineEvent({
                       ? 'text-event-no-active'
                       : 'text-white'
                   } text-xs px-2`}
-                  data-tip={data.searchterms}
+                  data-tip={data?.searchterms}
                 >
-                  {data.searchterms}
+                  {data?.searchterms}
                 </span>
                 <ReactTooltip />
               </div>
@@ -132,9 +126,9 @@ export default function TimelineEvent({
                     ? 'text-event-no-active'
                     : 'text-white'
                 } text-xs`}
-                data-tip={data.title}
+                data-tip={data?.title}
               >
-                {data.title}
+                {data?.title}
               </div>
               <ReactTooltip />
             </div>
