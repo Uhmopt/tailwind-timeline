@@ -10,7 +10,7 @@ export default function TimelineContent({
 }) {
   return (
     <div className="h-16 flex flex-row my-2 relative">
-      <div className="w-28 fixed z-20 h-16 flex flex-row justify-start bg-event-content">
+      <div className="w-18 sm:w-28 fixed z-20 h-16 flex flex-row justify-start bg-event-content">
         <div className="h-full w-10 p-2 text-3xl font-bold bg-event-dark rounded-l-lg justify-center items-center hidden sm:flex">
           {heading ?? ""}
         </div>

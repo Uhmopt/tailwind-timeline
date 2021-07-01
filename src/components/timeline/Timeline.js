@@ -6,7 +6,7 @@ export default function Timeline({ title = '', data = [], ...props }) {
   const [unit, setUnit] = useState(128)
 
   return (
-    <div className="pt-5 px-7 bg-gray-900 text-time-puple font-poppins overflow-hidden">
+    <div className="pt-5 px-7 bg-gray-900 text-time-puple font-poppins overflow-hidden whitespace-nowrap">
       {Boolean(title?.length) && (
         <span className="text-3xl font-bold">{title ?? ''}</span>
       )}
