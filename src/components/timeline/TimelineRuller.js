@@ -11,7 +11,13 @@ export const UnitHour = ({ value = '', ...props }) => (
   </div>
 )
 
-export default function TimelineRuller({ unit = 128, count = 0, ...props }) {
+export default function TimelineRuller({
+  unit = 128,
+  count = 0,
+  onNext = () => {},
+  onBefore = () => {},
+  ...props
+}) {
   const dirAmPm = ['am', 'pm']
   const hrs = []
   for (let index = 0; index < 12; index++) {
@@ -25,8 +31,8 @@ export default function TimelineRuller({ unit = 128, count = 0, ...props }) {
         )),
       )}
       <TimelineIndicator unit={unit} count={count} />
-      <TimelineBefore />
-      <TimelineNext />
+      <TimelineBefore onClick={onBefore} />
+      <TimelineNext onClick={onNext} />
     </div>
   )
 }
