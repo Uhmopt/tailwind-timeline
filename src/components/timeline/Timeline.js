@@ -23,7 +23,7 @@ export default function Timeline({ title = "", data = [], ...props }) {
       )}
       <div
         ref={refScroller}
-        className="w-full pt-8 overflow-x-auto h-full overflow-y-visible"
+        className="w-full pt-8 overflow-x-auto h-full overflow-y-hidden"
         style={{ scrollBehavior: "smooth" }}
       >
         <TimelineRuller
