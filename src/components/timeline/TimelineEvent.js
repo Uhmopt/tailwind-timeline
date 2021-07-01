@@ -21,8 +21,6 @@ export default function TimelineEvent({
   const startedDate = new Date(data?.started * 1000)
   const endedDate = new Date(data?.ended * 1000)
 
-  console.log(data)
-
   useEffect(() => {
     setStart(getTodayOffset(startedDate))
     setEnd(getTodayOffset(endedDate))

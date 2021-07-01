@@ -30,7 +30,7 @@ export default function TimelineContent({
           {heading ?? ''}
         </div>
         <div className="w-16">
-          <TimelineAvatar className={''} src={''} />
+          <TimelineAvatar className={''} src={data?.thumbnailImageUrl} />
         </div>
       </div>
       <div className="pl-28 fixed w-full h-16 bg-event-content">&nbsp;</div>
