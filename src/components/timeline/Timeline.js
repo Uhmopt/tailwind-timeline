@@ -13,13 +13,13 @@ export default function Timeline({ title = "", data = [], ...props }) {
     },
     {
       border: false,
-      eventType: 2,
+      eventType: 4,
       start: 20000,
       end: 30000,
     },
     {
       border: false,
-      eventType: 3,
+      eventType: 2,
       start: 40000,
       end: 50000,
     },
@@ -38,14 +38,16 @@ export default function Timeline({ title = "", data = [], ...props }) {
   ]);
 
   return (
-    <div className="p-2 bg-gray-900 text-time-puple font-poppins">
+    <div className="pt-5 pl-7 bg-gray-900 text-time-puple font-poppins overflow-hidden">
       {Boolean(title?.length) && (
         <span className="text-3xl font-bold">{title ?? ""}</span>
       )}
       <div className="w-full overflow-x-auto">
         <TimelineRuller />
         {smapleData.map((item, index) => {
-          return <TimelineContent heading={index + 1} data={item} unit={unit} />;
+          return (
+            <TimelineContent heading={index + 1} data={item} unit={unit} />
+          );
         })}
       </div>
     </div>

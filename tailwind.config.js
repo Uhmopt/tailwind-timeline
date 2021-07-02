@@ -7,6 +7,7 @@ module.exports = {
         "time-puple": "#FF0F50",
         "event-dark": "#212E3E",
         "event-content": "#161921",
+        "event-no-active": "#3D4C5E",
       },
     },
     fontFamily: {
