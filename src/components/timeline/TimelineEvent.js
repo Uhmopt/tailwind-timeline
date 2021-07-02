@@ -1,24 +1,31 @@
-import React from 'react'
-import ReactTooltip from 'react-tooltip'
+import React from "react";
+import ReactTooltip from "react-tooltip";
 
-export const daySecond = 86400
+export const daySecond = 86400;
 
 export const getTodayOffset = (date = new Date()) => {
-  return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds()
-}
+  return date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
+};
 
 export default function TimelineEvent({ unit = 128, data, ...props }) {
-  const fullWidth = unit * 24
+  const fullWidth = unit * 24;
 
   // calc time
-  const startedDate = new Date(data?.started * 1000)
-  const endedDate = new Date(data?.ended * 1000)
-  const start = getTodayOffset(startedDate)
-  const end = getTodayOffset(endedDate)
+  const startedDate = new Date(data?.started * 1000);
+  const endedDate = new Date(data?.ended * 1000);
+  const start = getTodayOffset(startedDate);
+  const end = getTodayOffset(endedDate);
 
   // calc event type
-  const border = data?.type === 'PLANNED'
-  const eventType = data?.type === 'PLANNED' ? 1 : 2
+  const border = data?.type === "PLANNED";
+  const eventType =
+    data?.type === "PLANNED" || data?.type === "STREAMED"
+      ? 1
+      : data?.type === "PREDICTED"
+      ? 2
+      : data?.type === "LIVE"
+      ? 3
+      : 4;
 
   return (
     <div
@@ -53,18 +60,18 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
       <div
         className={`px-2 w-full flex flex-col justify-around bg-event-dark cursor-pointer overflow-x-hidden z-10 ${
           eventType === 2 // both grad
-            ? 'rounded-none border-0'
+            ? "rounded-none border-0"
             : eventType === 3 // right grad
-            ? 'rounded-l-lg'
-            : 'rounded-lg border-2'
-        } ${Boolean(border) ? 'border-red-600' : 'border-transparent'}`}
+            ? "rounded-l-lg"
+            : "rounded-lg border-2"
+        } ${Boolean(border) ? "border-red-600" : "border-transparent"}`}
       >
         <div
           className={`font-bold w-full overflow-hidden text-sm  ${
-            Boolean(!border) ? 'text-white' : ''
+            Boolean(!border) ? "text-white" : ""
           }  `}
         >
-          {data?.title ?? ''}
+          {data?.title ?? ""}
         </div>
         <div className="flex flex-row">
           <div className="w-full flex flex-row justify-between items-center">
@@ -72,14 +79,14 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
               <span
                 className={`${
                   Boolean(!border) && Number(eventType) !== 3
-                    ? 'text-event-no-active'
-                    : 'text-white'
+                    ? "text-event-no-active"
+                    : "text-white"
                 } text-xs`}
               >
                 ⬤
               </span>
-              <span className="text-xs px-2" data-tip={data?.type ?? ''}>
-                {data?.type ?? ''}
+              <span className="text-xs px-2" data-tip={data?.type ?? ""}>
+                {data?.type ?? ""}
               </span>
               <ReactTooltip />
             </div>
@@ -87,8 +94,8 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
               <div
                 className={`${
                   Boolean(!border) && Number(eventType) !== 3
-                    ? 'text-event-no-active'
-                    : 'text-white'
+                    ? "text-event-no-active"
+                    : "text-white"
                 } text-xs`}
                 data-tip={data?.views}
               >
@@ -96,7 +103,7 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
                 <ReactTooltip />
               </div>
             ) : (
-              ''
+              ""
             )}
           </div>
         </div>
@@ -111,8 +118,8 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
                 <span
                   className={`${
                     Boolean(!border) && Number(eventType) !== 3
-                      ? 'text-event-no-active'
-                      : 'text-white'
+                      ? "text-event-no-active"
+                      : "text-white"
                   } text-xs px-2`}
                   data-tip={data?.searchterms}
                 >
@@ -123,8 +130,8 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
               <div
                 className={`${
                   Boolean(!border) && Number(eventType) !== 3
-                    ? 'text-event-no-active'
-                    : 'text-white'
+                    ? "text-event-no-active"
+                    : "text-white"
                 } text-xs`}
                 data-tip={data?.title}
               >
@@ -134,7 +141,7 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
             </div>
           </div>
         ) : (
-          ''
+          ""
         )}
       </div>
       {Boolean(eventType < 4 && eventType >= 2) && (
@@ -150,5 +157,5 @@ export default function TimelineEvent({ unit = 128, data, ...props }) {
         </div>
       )}
     </div>
-  )
+  );
 }
