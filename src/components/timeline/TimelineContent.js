@@ -11,7 +11,7 @@ export default function TimelineContent({
   return (
     <div className="h-16 flex flex-row my-2 relative">
       <div className="w-28 fixed z-20 h-16 flex flex-row justify-start bg-event-content">
-        <div className="h-full w-10 p-2 text-3xl font-bold bg-event-dark rounded-l-lg flex justify-center items-center">
+        <div className="h-full w-10 p-2 text-3xl font-bold bg-event-dark rounded-l-lg justify-center items-center hidden sm:flex">
           {heading ?? ""}
         </div>
         <div className="w-16">
@@ -20,7 +20,14 @@ export default function TimelineContent({
       </div>
       <div className="pl-28 fixed w-full h-16 bg-event-content">&nbsp;</div>
       <div className="pl-28 relative w-full">
-        <TimelineEvent unit={unit} {...(data ?? {})} />
+        {data?.time.map((item, index) => (
+          <TimelineEvent
+            key={index}
+            unit={unit}
+            times={item}
+            {...(data ?? {})}
+          />
+        ))}
       </div>
     </div>
   );

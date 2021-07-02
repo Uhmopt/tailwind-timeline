@@ -1,40 +1,39 @@
 import React from "react";
-
+import ReactTooltip from "react-tooltip";
 export default function TimelineEvent({
   title = "haha-Timeline",
   tag = "tiny small",
   unit = 128,
-  // time = {
-  start = 10000,
-  end = 20000,
-  // },
+  times = {
+    start: 10000,
+    end: 20000,
+  },
   eventType = 2,
   border = false,
   ...props
 }) {
   const daySecond = 86400;
   const fullWidth = unit * 24;
-
   return (
     <div
-      className="flex flex-row absolute h-16 flex-shrink-0 flex-grow-0"
+      className="flex flex-row absolute h-16 flex-shrink-0 flex-grow-0 whitespace-nowrap"
       style={
         Number(eventType) === 1
           ? {
-              left: (fullWidth * start) / daySecond,
-              flexBasis: (fullWidth * (end - start)) / daySecond,
+              left: (fullWidth * times.start) / daySecond,
+              flexBasis: (fullWidth * (times.end - times.start)) / daySecond,
             }
           : eventType === 2
           ? {
-              left: (fullWidth * start) / daySecond - 64,
-              flexBasis: (fullWidth * (end - start)) / daySecond,
+              left: (fullWidth * times.start) / daySecond - 64,
+              flexBasis: (fullWidth * (times.end - times.start)) / daySecond,
             }
           : eventType === 3
           ? {
-              left: (fullWidth * start) / daySecond,
+              left: (fullWidth * times.start) / daySecond,
             }
           : {
-              left: (fullWidth * start) / daySecond,
+              left: (fullWidth * times.start) / daySecond,
             }
       }
     >
@@ -71,7 +70,10 @@ export default function TimelineEvent({
               >
                 ⬤
               </span>
-              <span className="text-xs px-2">{tag ?? ""}</span>
+              <span className="text-xs px-2" data-tip={tag ?? ""}>
+                {tag ?? ""}
+              </span>
+              <ReactTooltip />
             </div>
             {eventType !== 4 ? (
               <div
@@ -80,8 +82,10 @@ export default function TimelineEvent({
                     ? "text-event-no-active"
                     : "text-white"
                 } text-xs`}
+                data-tip="1.77k viewer"
               >
-                asdflkajsdfl
+                1.77k viewer
+                <ReactTooltip />
               </div>
             ) : (
               ""
@@ -92,16 +96,21 @@ export default function TimelineEvent({
           <div className="flex flex-row">
             <div className="w-full flex flex-row justify-between items-center">
               <div className="flex justify-flex-start items-center">
-                <span className="text-xs">Live</span>
+                <span className="text-xs" data-tip="Livewww">
+                  Livewww
+                </span>
+                <ReactTooltip />
                 <span
                   className={`${
                     Boolean(!border) && Number(eventType) !== 3
                       ? "text-event-no-active"
                       : "text-white"
                   } text-xs px-2`}
+                  data-tip="From Twitch.tv"
                 >
-                  ahfaklsdfjalksdfj
+                  From Twitch.tv
                 </span>
+                <ReactTooltip />
               </div>
               <div
                 className={`${
@@ -109,9 +118,11 @@ export default function TimelineEvent({
                     ? "text-event-no-active"
                     : "text-white"
                 } text-xs`}
+                data-tip="asdflkajsdfl"
               >
                 asdflkajsdfl
               </div>
+              <ReactTooltip />
             </div>
           </div>
         ) : (
