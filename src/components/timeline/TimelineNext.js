@@ -4,7 +4,7 @@ export default function TimelineNext({ className = "", ...props }) {
   return (
     <div
       {...props}
-      className={`px-2 right-6 top-18 fixed cursor-pointer bg-gray-900 flex justify-center items-center ${className}`}
+      className={`px-2 p-1 right-6 top-18 fixed cursor-pointer bg-gray-900 flex justify-center items-center ${className}`}
     >
       <svg
         className="w-4 fill-current text-time-puple"

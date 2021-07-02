@@ -5,7 +5,7 @@ import TimelineNext from "./TimelineNext";
 
 export const UnitHour = ({ value = "", ...props }) => (
   <div className="mr-32">
-    <span className="text-sm whitespace-nowrap">
+    <span className="text-lg font-bold whitespace-nowrap">
       {String(value ?? "").toUpperCase()}
     </span>
   </div>
