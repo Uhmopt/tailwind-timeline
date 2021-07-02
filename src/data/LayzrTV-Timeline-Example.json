@@ -1,7 +1,4 @@
 [
-  {
-    "Layzr2Priority": {
-      "items": [
         {
           "priority": 0,
           "owner": "0a7fdbff-718b-48d2-957e-60a55cf97019",
@@ -1945,9 +1942,3 @@
           }
         }
       ]
-    },
-    "name": "test",
-    "id": "c57daa04-c3db-4513-8c90-33d27f2192d7",
-    "owner": "0a7fdbff-718b-48d2-957e-60a55cf97019"
-  }
-]

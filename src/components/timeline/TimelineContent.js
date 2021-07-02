@@ -5,7 +5,7 @@ import TimelineEvent from "./TimelineEvent";
 export default function TimelineContent({
   heading = "",
   unit = 128,
-  data = {},
+  data = [],
   ...props
 }) {
   return (
@@ -20,13 +20,8 @@ export default function TimelineContent({
       </div>
       <div className="pl-28 fixed w-full h-16 bg-event-content">&nbsp;</div>
       <div className="pl-28 relative w-full">
-        {data?.time.map((item, index) => (
-          <TimelineEvent
-            key={index}
-            unit={unit}
-            times={item}
-            {...(data ?? {})}
-          />
+        {data?.map((item, index) => (
+          <TimelineEvent key={index} unit={unit} data={item} />
         ))}
       </div>
     </div>
