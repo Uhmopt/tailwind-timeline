@@ -47,7 +47,7 @@ export default function TimelineIndicator({ unit = 128, count = 0, ...props }) {
         style={{
           width: (fullWidth * currentTime) / daySecond,
           // h-16 my-2 : 64 + 16 : 80
-          height: count * 80 - 10,
+          height: count * 80 + 3,
         }}
       >
         <div className="h-full w-full mix-blend-hard-light bg-gray-900 opacity-10 pointer-events-none">
